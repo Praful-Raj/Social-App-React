@@ -5,21 +5,22 @@ import Sidebar from './component/Sidebar'
 import './App.css'
 import CreatePost from './component/CreatePost'
 import PostList from './component/PostList'
+import PostListProvider from './store/PostListContext'
 
 
 function App() {
   const [selectedTab,setSelectedTab]=useState("Home")
   return (
+    <PostListProvider>
     <div className='app-container'>
       <Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab}/>
       <div className='content'>
         <Header/>
         {selectedTab==="Home"?<PostList/>:<CreatePost/>}
-        
-        
         <Footer/>
       </div>
     </div>
+    </PostListProvider>
   )
 }
 

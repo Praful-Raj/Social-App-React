@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { createContext } from "react";
 
 // const DEFAULT_CONTEXT=[
@@ -22,7 +22,7 @@ import { createContext } from "react";
 
 export const PostListContext=createContext({
     postList:[],
-    addMultiplePostsFormServer:()=>{},
+    // fetching: false,
     addPost:()=>{},
     deletePost:()=>{},
 });
@@ -46,6 +46,8 @@ const postListReducer=(currPostList, action)=>{
 
 const PostListProvider=({children})=>{
     const [postList, dispatchPostList]=useReducer(postListReducer,[]);
+    // const [fetching, setFetching ]=useState(false);
+
 
     const addMultiplePostsFormServer=(posts)=>{
         dispatchPostList({
@@ -79,12 +81,28 @@ const PostListProvider=({children})=>{
                 userID,
             },
         });
-
     }
+    // useEffect(()=>{
+    //     const controller =new AbortController();
+    //     const signal=controller.signal;
+
+    //     setFetching(true);
+    //     fetch('https://dummyjson.com/posts', {signal})
+    //         .then(res => res.json())
+    //         .then((data=>{addMultiplePostsFormServer(data.posts)
+    //         setFetching(false)})
+    //     );
+    //     return ()=>{
+    //         console.log("Abort called!")
+    //         controller.abort();
+    //     }
+
+        
+    // },[])
     return (
         <PostListContext.Provider value={{
             postList,
-            addMultiplePostsFormServer,
+            // fetching,
             addPost,
             deletePost,
         }}>{children}</PostListContext.Provider>

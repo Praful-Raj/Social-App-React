@@ -6,6 +6,7 @@ import './App.css'
 import CreatePost from './component/CreatePost'
 import PostList from './component/PostList'
 import PostListProvider from './store/PostListContext'
+import {Outlet} from "react-router-dom"
 
 
 function App() {
@@ -16,7 +17,8 @@ function App() {
       <Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab}/>
       <div className='content'>
         <Header/>
-        {selectedTab==="Home"?<PostList/>:<CreatePost/>}
+        {/* {selectedTab==="Home"?<PostList/>:<CreatePost/>} */}
+        <Outlet/>
         <Footer/>
       </div>
     </div>
